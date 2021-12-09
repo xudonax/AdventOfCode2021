@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AdventOfCode.Day2
 {
-    class Problem1
+    class Problem2
     {
         static void OldMain()
         {
@@ -16,14 +16,19 @@ namespace AdventOfCode.Day2
         {
             var horizontal = 0;
             var depth = 0;
+            var aim = 0;
 
             foreach (var command in commands)
             {
                 var (direction, movement) = ParseCommand(command);
 
-                if (direction == Direction.Up) depth -= movement;
-                if (direction == Direction.Down) depth += movement;
-                if (direction == Direction.Forward) horizontal += movement;
+                if (direction == Direction.Up) aim -= movement;
+                if (direction == Direction.Down) aim += movement;
+                if (direction == Direction.Forward) 
+                {
+                    horizontal += movement;
+                    depth += aim * movement;
+                }
             }
 
             return (horizontal, depth);
